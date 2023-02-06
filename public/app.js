@@ -15,12 +15,13 @@ if($card) {
         if(event.target.classList.contains('js-remove')) {
             const id = event.target.dataset.id
             
-            
+            console.log(id)
             
             fetch('/card/remove/' + id, {
                 method: 'delete'
             }).then(res => res.json())
               .then(card => {
+              console.log(card)
                 if(card.courses.length) {
                     const html = card.courses.map(c => {
                         return `
@@ -33,7 +34,7 @@ if($card) {
                             </tr>
                         `
                     }).join('')
-                    $card.querySelector('t.body').innerHTML = html
+                    $card.querySelector('tbody').innerHTML = html
                     $card.querySelector('.price').textContent = toCurrency(card.price)
                 } else {
                     $card.innerHTML = '<p>Basked is empty</p>'
